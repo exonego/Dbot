@@ -51,10 +51,16 @@ async def answer_if_correct_equation(message: Message, variable: str):
     c = int(nums[2][:-2])
 
     discriminant = b**2 - (4 * a * c)
-    roots = sorted(
-        [(-1 * b + discriminant**0.5) / (2 * a), (-1 * b - discriminant**0.5) / (2 * a)]
-    )
-    await message.answer(f"{variable}1 = {roots[0]}\n{variable}2 = {roots[1]}")
+    if discriminant < 0:
+        await message.reply("Корней нет")
+    else:
+        roots = sorted(
+            [
+                (-1 * b + discriminant**0.5) / (2 * a),
+                (-1 * b - discriminant**0.5) / (2 * a),
+            ]
+        )
+        await message.reply(f"{variable}1 = {roots[0]}\n{variable}2 = {roots[1]}")
 
 
 if __name__ == "__main__":
