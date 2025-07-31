@@ -58,15 +58,22 @@ async def answer_correct_equation(message: Message, variable: str):
     b = int(b)
     c = int(nums[2][:-2])
 
-    discriminant = b**2 - (4 * a * c)
+    discriminant = b**2 - 4 * a * c
+    await message.answer(f"D = {b}² - 4 * {a} * {c} = {discriminant}")
     if discriminant < 0:
+        await message.answer(f"D = {discriminant} < 0 -->")
         await message.reply("Корней нет")
     else:
-        roots = sorted(
-            [
-                (-1 * b + discriminant**0.5) / (2 * a),
-                (-1 * b - discriminant**0.5) / (2 * a),
-            ]
+        roots = [
+            (-1 * b + discriminant**0.5) / (2 * a),
+            (-1 * b - discriminant**0.5) / (2 * a),
+        ]
+        await message.answer(f"D = {discriminant} >= 0 -->")
+        await message.answer(
+            f"{variable}1 = ({b * -1} + √{discriminant}) / (2 * {a}) = {roots[0]}"
+        )
+        await message.answer(
+            f"{variable}2 = ({b * -1} - √{discriminant}) / (2 * {a}) = {roots[1]}"
         )
         await message.reply(f"{variable}1 = {roots[0]}\n{variable}2 = {roots[1]}")
 
