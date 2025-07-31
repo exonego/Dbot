@@ -1,2 +1,5 @@
-# File with your bot token
+# python cache
+__pycache__
+
+# file with your bot token
 bot_token.py
